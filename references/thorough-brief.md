@@ -1,6 +1,6 @@
 # Brief for the thorough reviewer
 
-Fill every `{...}`. Send as the first prompt of a `general-purpose` agent. Keep the whole
+Fill every `{...}`. Send as the first prompt of a fresh subagent. Keep the whole
 brief: each section earned its place in the run that produced it.
 
 ---

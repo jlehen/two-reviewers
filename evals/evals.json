@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "Review designs/DESIGN_waiting_proposal.md with two reviewers, a thorough one and a pragmatic one, until they agree. The user requires that a long command never blocks the chat. Commit each version.",
-      "expected_output": "Two general-purpose agents spawned once each and continued via SendMessage; one commit per applied pass on the current branch; the requirement given to both reviewers in their first brief; a final report with a version table, removed and fixed items as stories, decisions taken without the user, and both verdicts AGREE on the same commit.",
+      "expected_output": "Two fresh subagents started once each and continued across passes; one commit per applied pass on the current branch; the requirement given to both reviewers in their first brief; a final report with a version table, removed and fixed items as stories, decisions taken without the user, and both verdicts AGREE on the same commit.",
       "files": []
     },
     {

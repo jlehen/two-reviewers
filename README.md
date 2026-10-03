@@ -1,7 +1,9 @@
 # two-reviewers
 
-A Claude Code skill that reviews a design document, plan, spec or RFC with two subagents in
-turn, until both approve the same version.
+An [Agent Skill](https://agentskills.io) that reviews a design document, plan, spec or RFC
+with two subagents in turn, until both approve the same version. It is written for any coding
+agent that loads skills and can start subagents (Claude Code, Codex, Antigravity and others):
+it names no agent-specific tool.
 
 - The **thorough** reviewer checks every claim against the real code and hunts
   inconsistencies, race conditions and gaps.
@@ -9,28 +11,40 @@ turn, until both approve the same version.
   and maintain.
 
 They fail in opposite directions: one adds a mechanism for every edge case, the other cuts
-protections a real user needs. Claude coordinates: it checks the reviewers' facts, applies
-each pass to the document, and hands each reviewer the other's changes and reasons, so each
-undoes the other's excess.
+protections a real user needs. The agent you ask coordinates: it checks the reviewers' facts,
+applies each pass to the document, and hands each reviewer the other's changes and reasons, so
+each undoes the other's excess.
 
 ## Install
 
+Link or copy this directory into the place your agent loads skills from:
+
 ```sh
-ln -s "$PWD" ~/.claude/skills/two-reviewers
+ln -s "$PWD" ~/.claude/skills/two-reviewers                  # Claude Code
+ln -s "$PWD" /path/to/project/.agents/skills/two-reviewers   # Codex, Antigravity
 ```
+
+For another agent, or for its per-user directory, see its documentation.
 
 ## Use
 
+Ask in plain words:
+
 ```
-/two-reviewers designs/DESIGN_foo.md
+Review designs/DESIGN_foo.md with two reviewers until they agree.
+Review designs/DESIGN_foo.md with two reviewers and commit each version. Requirement: a long
+command never blocks the chat.
+```
+
+Where your agent invokes a skill by name, pass the same as arguments. In Claude Code:
+
+```
 /two-reviewers designs/DESIGN_foo.md --commit requirement: a long command never blocks the chat
 ```
 
-Or ask in plain words: "review this plan with two reviewers until they agree".
-
-- `--commit` commits the starting version and then each applied pass, so the history shows
-  what each reviewer changed. Without it the document is edited in place and nothing is
-  committed.
+- `--commit`, or "commit each version", commits the starting version and then each applied
+  pass, so the history shows what each reviewer changed. Without it the document is edited in
+  place and nothing is committed.
 - `requirement:` names a decision you will not drop. Both reviewers get it up front, so
   neither cuts it.
 

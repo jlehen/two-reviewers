@@ -1,6 +1,6 @@
 ---
 name: two-reviewers
-description: Review a design document, plan, spec or RFC with two subagents in turn — a thorough reviewer that checks every claim against the real code and hunts inconsistencies, race conditions and gaps, and a pragmatic senior reviewer that cuts over-engineering and weighs maintenance cost — applying each pass to the document and alternating until both agree on the same version. Use this whenever the user asks for a design review, says "two reviewers", "thorough and pragmatic", "review until they agree", "technical vs pragmatic", or wants a DESIGN_*.md, plan or proposal checked before it is implemented. Pass `--commit` to commit each version.
+description: Review a design document, plan, spec or RFC with two subagents in turn — a thorough reviewer that checks every claim against the real code and hunts inconsistencies, race conditions and gaps, and a pragmatic senior reviewer that cuts over-engineering and weighs maintenance cost — applying each pass to the document and alternating until both agree on the same version. Use this whenever the user asks for a design review, says "two reviewers", "thorough and pragmatic", "review until they agree", "technical vs pragmatic", or wants a DESIGN_*.md, plan or proposal checked before it is implemented. Pass `--commit`, or ask in plain words, to commit each version.
 argument-hint: <path-to-document> [--commit] [requirement: <one the author will not drop>]
 ---
 
@@ -25,10 +25,10 @@ excess. The loop ends when neither has anything left to add or cut.
    rules, style), every document the design cites, and the code behind each touch point the
    design names. List them by path. A reviewer told "check the code" finds less than one
    handed the files.
-4. With `--commit`: commit the document as it stands, message "<file>: <title>" plus "This is
-   the version before review." Each applied pass then gets its own commit, so the history
-   shows what each reviewer changed. Without `--commit`, edit in place and never commit; most
-   projects reserve commits for the user.
+4. With `--commit`, or when the user asks for it in plain words: commit the document as it
+   stands, message "<file>: <title>" plus "This is the version before review." Each applied
+   pass then gets its own commit, so the history shows what each reviewer changed. Otherwise
+   edit in place and never commit; most projects reserve commits for the user.
 
 ## The loop
 
@@ -37,10 +37,12 @@ thorough pass → apply → pragmatic pass → apply → thorough pass → … u
 the same version
 ```
 
-Spawn each reviewer once with the Agent tool (`general-purpose`, not a fork: a fresh agent
-reads the code without your conclusions in its head). Keep both agent ids. Every later pass
-goes to the same agent through SendMessage, so it keeps what it read and can check that its
-own findings were really closed rather than merely mentioned.
+Start each reviewer once as a fresh subagent, with whatever your agent provides for that, and
+not as a copy of this conversation: a fresh agent reads the code without your conclusions in
+its head. Send every later pass to the same reviewer, so it keeps what it read and can check
+that its own findings were really closed rather than merely mentioned. If you cannot continue
+a subagent you started, start a new one for each pass and give it the same brief, that
+reviewer's previous report and the handoff below.
 
 The first brief for each reviewer is in `references/thorough-brief.md` and
 `references/pragmatic-brief.md`. Fill the placeholders; do not trim the sections. Each brief

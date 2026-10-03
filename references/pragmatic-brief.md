@@ -1,6 +1,6 @@
 # Brief for the pragmatic reviewer
 
-Fill every `{...}`. Send as the first prompt of a `general-purpose` agent, after the first
+Fill every `{...}`. Send as the first prompt of a fresh subagent, after the first
 thorough pass has been applied, so the diff of that pass exists. Keep the whole brief.
 
 ---
