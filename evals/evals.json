@@ -1,0 +1,17 @@
+{
+  "skill_name": "two-reviewers",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review designs/DESIGN_waiting_proposal.md with two reviewers, a thorough one and a pragmatic one, until they agree. The user requires that a long command never blocks the chat. Commit each version.",
+      "expected_output": "Two general-purpose agents spawned once each and continued via SendMessage; one commit per applied pass on the current branch; the requirement given to both reviewers in their first brief; a final report with a version table, removed and fixed items as stories, decisions taken without the user, and both verdicts AGREE on the same commit.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I wrote a plan in docs/plans/2026-10-retry-queue.md for moving the retry logic into a queue. Can you have it reviewed technical vs pragmatic before I start?",
+      "expected_output": "No commits (no --commit); the plan edited in place pass by pass; reviewers told to read the project's instruction files and the code the plan touches; the loop ends only when both say AGREE about the same file state; the report names any decision a reviewer took that the user had left open.",
+      "files": []
+    }
+  ]
+}
